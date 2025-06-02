@@ -1,0 +1,85 @@
+# Excel to Tally Transfer Tool
+
+
+### What This Tool Does
+Transfers transaction data from Excel directly to Tally ERP with a simple 3-step GUI interface.
+
+---
+
+## 📋 Requirements
+
+### Excel File Format
+Your Excel file MUST have exactly these 4 columns with exact names:
+
+| Column Name 	| Description 		| Example 		 |
+|-------------	|----------------------	|----------------------- |
+| **Date**    	| Transaction date 	| 10-04-2025 		 |
+| **Amount**  	| Transaction amount 	| 100 (+ve) or -50 (-ve) |
+| **Narration** | Description 		| "Fees received" 	 |
+| **GL** 	| General Ledger acount | "Suspense" 		 |
+
+**Important Notes:**
+- Column names are case-sensitive
+- Positive amounts = Cash receipts (Cash Dr, GL Cr)
+- Negative amounts = Cash payments (GL Dr, Cash Cr)
+
+---
+
+##  Installation 
+
+- Standalone Executable
+
+1. Download the executable file: `ExcelToTally.exe`
+2. Create desktop shortcut for easy access
+3. Double-click to run - GUI opens immediately
+
+---
+
+## Tally Setup 
+
+### Before Using the Tool:
+
+1. Open Tally ERP
+2. Enable Gateway:
+   - Press F12 (Configure)
+   - Go to Connectivity
+   - Set "Gateway of Tally" = Yes
+   - Port should be 9000 (default)
+   - Press Ctrl+A to accept
+3. Open your company in Tally
+4. Ensure all GL accounts exist in your Tally company
+
+### Verify Gateway is Working:
+- You should see "Gateway: Enabled" in Tally's title bar
+- Port 9000 should be listening
+- Excel file in .xlsx or .xls format
+- Windows 7/8/10/11
+---
+
+## How to Use
+
+### Step-by-Step Guide:
+
+#### Step 1: Launch Application
+- Double-click the desktop icon or .exe file
+- GUI window opens with 3 clear steps
+
+#### Step 2: Select Excel File
+- Click "Browse" button
+- Select your Excel file from the file dialog
+- File name appears next to the button
+
+#### Step 3: Preview Data
+- Click "Load & Preview Data"
+- Review the transactions in the preview area
+- Check that accounting logic is correct:
+  - Positive amounts: Cash Dr, GL Cr
+  - Negative amounts: GL Dr, Cash Cr
+
+#### Step 4: Transfer to Tally
+- Click "Transfer to Tally"
+- Confirm in the dialog box
+- Wait for transfer to complete
+- Check success/error messages
+
+---

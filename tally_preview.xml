@@ -1,0 +1,56 @@
+<ENVELOPE>
+    <HEADER>
+        <TALLYREQUEST>Import Data</TALLYREQUEST>
+    </HEADER>
+    <BODY>
+        <IMPORTDATA>
+            <REQUESTDESC>
+                <REPORTNAME>Vouchers</REPORTNAME>
+                <STATICVARIABLES>
+                    <SVCURRENTCOMPANY>$$CURRENTCOMPANY</SVCURRENTCOMPANY>
+                </STATICVARIABLES>
+            </REQUESTDESC>
+            <REQUESTDATA>
+                
+        <TALLYMESSAGE>
+            <VOUCHER VCHTYPE="Receipt" ACTION="Create">
+                <DATE>20250410</DATE>
+                <NARRATION>Fees received</NARRATION>
+                <VOUCHERTYPENAME>Receipt</VOUCHERTYPENAME>
+                <PARTYLEDGERNAME>Suspense</PARTYLEDGERNAME>
+                <ALLLEDGERENTRIES.LIST>
+                    <LEDGERNAME>Cash</LEDGERNAME>
+                    <ISDEEMEDPOSITIVE>Yes</ISDEEMEDPOSITIVE>
+                    <AMOUNT>-100.0</AMOUNT>
+                </ALLLEDGERENTRIES.LIST>
+                <ALLLEDGERENTRIES.LIST>
+                    <LEDGERNAME>Suspense</LEDGERNAME>
+                    <ISDEEMEDPOSITIVE>No</ISDEEMEDPOSITIVE>
+                    <AMOUNT>100.0</AMOUNT>
+                </ALLLEDGERENTRIES.LIST>
+            </VOUCHER>
+        </TALLYMESSAGE>
+        
+        <TALLYMESSAGE>
+            <VOUCHER VCHTYPE="Receipt" ACTION="Create">
+                <DATE>20250412</DATE>
+                <NARRATION>Tea off</NARRATION>
+                <VOUCHERTYPENAME>Receipt</VOUCHERTYPENAME>
+                <PARTYLEDGERNAME>Cash</PARTYLEDGERNAME>
+                <ALLLEDGERENTRIES.LIST>
+                    <LEDGERNAME>Suspense</LEDGERNAME>
+                    <ISDEEMEDPOSITIVE>Yes</ISDEEMEDPOSITIVE>
+                    <AMOUNT>-50.0</AMOUNT>
+                </ALLLEDGERENTRIES.LIST>
+                <ALLLEDGERENTRIES.LIST>
+                    <LEDGERNAME>Cash</LEDGERNAME>
+                    <ISDEEMEDPOSITIVE>No</ISDEEMEDPOSITIVE>
+                    <AMOUNT>50.0</AMOUNT>
+                </ALLLEDGERENTRIES.LIST>
+            </VOUCHER>
+        </TALLYMESSAGE>
+        
+            </REQUESTDATA>
+        </IMPORTDATA>
+    </BODY>
+</ENVELOPE>

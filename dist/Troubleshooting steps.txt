@@ -1,0 +1,88 @@
+## Error Messages & Solutions
+
+### File Selection Errors
+
+"Missing required columns: ['Date', 'Amount', 'Narration', 'GL']"
+- Solution: Check your Excel column names are exactly: Date, Amount, Narration, GL (case-sensitive)
+
+"No data found in Excel file"
+- Solution: Excel file is empty or all rows are blank
+
+"Row X: Date cannot be empty"
+- Solution:** Fill in missing dates in your Excel file
+
+"Row X: Amount cannot be empty"
+- Solution: Fill in missing amounts in your Excel file
+
+"Row X: GL cannot be empty"
+- Solution: Fill in missing GL account names
+
+### Tally Connection Errors
+
+"Cannot connect to Tally"
+- Solutions:
+  1. Ensure Tally is running
+  2. Enable Gateway: F12 → Connectivity → Gateway of Tally = Yes
+  3. Check port 9000 is free (close other applications using it)
+  4. Restart Tally if needed
+
+"Request timed out. Tally might be busy"
+- Solutions:
+  1. Wait and try again
+  2. Close unnecessary screens in Tally
+  3. Reduce Excel file size (process in smaller batches)
+
+"Tally Error: [Specific Error]"
+- Common Solutions:
+  1. Check GL account names exist in Tally
+  2. Verify company is open in Tally
+  3. Check date formats are valid
+  4. Ensure ledger accounts are not restricted
+
+### Data Validation Errors
+
+"Invalid date format"
+- Solution: Use recognizable date formats (DD-MM-YYYY, MM/DD/YYYY, etc.)
+
+"Invalid amount"
+- Solution: Amounts must be numbers (can be positive or negative)
+
+---
+
+## Generated Files
+
+The application creates these files automatically:
+
+### **tally_preview.xml**
+- Contains the XML data sent to Tally
+- Useful for debugging if transfer fails
+- Can be manually imported to Tally if needed
+
+### **Application Logs**
+- Error details are displayed in the GUI
+- Check preview area for detailed information
+
+---
+
+### Common Issues:
+
+**"Application won't start"**
+- Ensure all required files are in same folder
+- Try running as Administrator
+- Check Windows antivirus isn't blocking
+
+**"Excel file won't load"**
+- File might be corrupted
+- Try saving Excel file in different format
+- Close Excel application before transfer
+
+**"Transfer appears successful but data not in Tally"**
+- Check correct company is open in Tally
+- Verify date range in Tally reports
+- Look for vouchers with "Receipt" type
+
+---
+
+**Version:** 1.0  
+**Last Updated:** June 2025  
+**Compatibility:** Windows 7+ with Tally ERP 6.3+
