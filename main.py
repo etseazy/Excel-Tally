@@ -146,7 +146,7 @@ class ExcelToTallyGUI:
             preview_text += "PREVIEW OF TRANSACTIONS TO BE SENT TO TALLY\n"
             preview_text += "="*60 + "\n\n"
             
-            # Show first 5 transactions
+            # Show only first 5 transactions
             for i, txn in enumerate(self.transactions[:5]):
                 preview_text += f"Transaction {i+1}:\n"
                 preview_text += f"  Date: {txn['Date']}\n"
