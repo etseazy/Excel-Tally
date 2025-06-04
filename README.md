@@ -17,18 +17,36 @@ A simple, user-friendly tool to transfer transactions from Excel to Tally ERP 9/
 
 ## Requirements
 
-- Python 3.8+
+### Software Requirements
+- Python 3.8+ (if running from source)
 - Tally ERP 9 or Tally Prime (with ODBC/HTTP Gateway enabled, usually on port 9000)
-- The following Python packages (see `requirements.txt`):
-  - `pandas`
-  - `requests`
-  - `openpyxl` (for `.xlsx` support)
+- Windows 7/8/10/11
+
+### Excel File Format
+Your Excel file MUST have exactly these 4 columns with exact names:
+
+| Column Name  | Description           | Example          |
+|--------------|-----------------------|------------------|
+| **Date**     | Transaction date      | 10-04-2025       |
+| **Amount**   | Transaction amount    | 100 (+ve) or -50 (-ve) |
+| **Narration**| Description           | "Fees received"  |
+| **GL**       | General Ledger account| "Suspense"       |
+
+**Important Notes:**
+- Column names are case-sensitive.
+- Positive amounts = Cash receipts (Cash Dr, GL Cr).
+- Negative amounts = Cash payments (GL Dr, Cash Cr).
 
 ---
 
 ## Setup
 
+### Run from Source
+
 1. **Clone or Download the Repository**
+   ```bash
+   git clone <repository-url>
+   ```
 
 2. **Install Dependencies**
    ```bash

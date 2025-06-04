@@ -1,48 +1,52 @@
 import pandas as pd
+import html  # Required to escape XML special characters
 
 def generate_tally_xml(transactions):
-    """Generate Tally XML from transactions - no format changes"""
+    """Generate Tally XML from transactions - escaping special characters"""
     entries_xml = ""
 
     for row in transactions:
-        # Use date exactly as provided, convert to Tally format
         try:
             date_str = pd.to_datetime(row['Date']).strftime('%Y%m%d')
         except:
             # If date conversion fails, skip this transaction
             print(f"[WARNING] Skipping transaction with invalid date: {row['Date']}")
             continue
-            
-        amount = float(row['Amount'])
-        narration = str(row['Narration'])
-        gl = str(row['GL'])
 
-        # Determine Debit/Credit based on amount sign (as per your logic)
+        amount = float(row['Amount'])
+
+        # Escape all user-input text fields
+        narration = html.escape(str(row['Narration']))
+        gl = html.escape(str(row['GL']))
+
+        # Determine voucher type and accounting entries based on amount sign
         if amount >= 0:
-            dr_account = "Cash"
-            cr_account = gl
+            # Positive amount = Money coming IN = Receipt voucher
+            voucher_type = "Receipt"
+            dr_account = html.escape("Cash")  # Cash debited
+            cr_account = gl                   # GL account credited
         else:
-            dr_account = gl
-            cr_account = "Cash"
-            amount = abs(amount)
+            # Negative amount = Money going OUT = Payment voucher
+            voucher_type = "Payment"
+            dr_account = gl                   # GL account debited
+            cr_account = html.escape("Cash")  # Cash credited
 
         # Generate Tally XML voucher entry
         entries_xml += f"""
         <TALLYMESSAGE>
-            <VOUCHER VCHTYPE="Receipt" ACTION="Create">
+            <VOUCHER VCHTYPE="{voucher_type}" ACTION="Create">
                 <DATE>{date_str}</DATE>
                 <NARRATION>{narration}</NARRATION>
-                <VOUCHERTYPENAME>Receipt</VOUCHERTYPENAME>
-                <PARTYLEDGERNAME>{cr_account}</PARTYLEDGERNAME>
+                <VOUCHERTYPENAME>{voucher_type}</VOUCHERTYPENAME>
                 <ALLLEDGERENTRIES.LIST>
                     <LEDGERNAME>{dr_account}</LEDGERNAME>
                     <ISDEEMEDPOSITIVE>Yes</ISDEEMEDPOSITIVE>
-                    <AMOUNT>-{amount}</AMOUNT>
+                    <AMOUNT>-{abs(amount)}</AMOUNT>
                 </ALLLEDGERENTRIES.LIST>
                 <ALLLEDGERENTRIES.LIST>
                     <LEDGERNAME>{cr_account}</LEDGERNAME>
                     <ISDEEMEDPOSITIVE>No</ISDEEMEDPOSITIVE>
-                    <AMOUNT>{amount}</AMOUNT>
+                    <AMOUNT>{abs(amount)}</AMOUNT>
                 </ALLLEDGERENTRIES.LIST>
             </VOUCHER>
         </TALLYMESSAGE>
@@ -67,5 +71,6 @@ def generate_tally_xml(transactions):
         </IMPORTDATA>
     </BODY>
 </ENVELOPE>"""
-    
+
     return full_xml.strip()
+
